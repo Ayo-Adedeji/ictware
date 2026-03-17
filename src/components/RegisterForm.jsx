@@ -7,6 +7,7 @@ export default function RegisterForm() {
     email: "",
     phone: "",
     company: "",
+    occupation: "",
     attending: "",
     inviteVia: "",
   });
@@ -31,6 +32,7 @@ export default function RegisterForm() {
           email: form.email,
           phone: form.phone,
           company: form.company || "N/A",
+          occupation: form.occupation,
           attending: form.attending,
           invite_via: form.inviteVia,
           _subject: "New Registration — Digital Bridges Summit",
@@ -173,6 +175,19 @@ export default function RegisterForm() {
                     value={form.company}
                     onChange={handleChange}
                     placeholder="Your company name"
+                    className={inputClass}
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="block font-body text-xs font-semibold text-secondary mb-1.5 uppercase tracking-wide">
+                    Occupation <span className="text-[#1A4F8A]">*</span>
+                  </label>
+                  <input
+                    name="occupation"
+                    required
+                    value={form.occupation}
+                    onChange={handleChange}
+                    placeholder="e.g. Software Engineer, Business Owner, Student"
                     className={inputClass}
                   />
                 </div>
