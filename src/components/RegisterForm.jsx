@@ -8,6 +8,7 @@ export default function RegisterForm() {
     phone: "",
     company: "",
     attending: "",
+    inviteVia: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -31,6 +32,7 @@ export default function RegisterForm() {
           phone: form.phone,
           company: form.company || "N/A",
           attending: form.attending,
+          invite_via: form.inviteVia,
           _subject: "New Registration — Digital Bridges Summit",
           _captcha: "false",
           _template: "table",
@@ -69,6 +71,11 @@ export default function RegisterForm() {
             <h2 className="font-display font-black text-3xl sm:text-4xl text-primary mt-2">
               Reserve Your Seat
             </h2>
+            <div className="mt-3 mb-1">
+              <span className="inline-flex items-center gap-2 bg-[#C89B2A] text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest">
+                🎟️ Free Entry
+              </span>
+            </div>
             <p className="font-body text-gray-500 mt-3 text-sm">
               Secure your spot at the Digital Bridges Summit — Lagos, Nigeria · April 11, 2026
             </p>
@@ -145,7 +152,7 @@ export default function RegisterForm() {
                 </div>
                 <div>
                   <label className="block font-body text-xs font-semibold text-secondary mb-1.5 uppercase tracking-wide">
-                    Phone Number <span className="text-[#1A4F8A]">*</span>
+                    WhatsApp Number <span className="text-[#1A4F8A]">*</span>
                   </label>
                   <input
                     name="phone"
@@ -153,7 +160,7 @@ export default function RegisterForm() {
                     required
                     value={form.phone}
                     onChange={handleChange}
-                    placeholder="+234 800 000 0000"
+                    placeholder="WhatsApp Number"
                     className={inputClass}
                   />
                 </div>
@@ -183,6 +190,22 @@ export default function RegisterForm() {
                     <option value="" disabled>Select one...</option>
                     <option value="Individual">Individual</option>
                     <option value="Business">Business</option>
+                  </select>
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="block font-body text-xs font-semibold text-secondary mb-1.5 uppercase tracking-wide">
+                    Where should your invite be sent to? <span className="text-[#1A4F8A]">*</span>
+                  </label>
+                  <select
+                    name="inviteVia"
+                    required
+                    value={form.inviteVia}
+                    onChange={handleChange}
+                    className={inputClass}
+                  >
+                    <option value="" disabled>Select one...</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Email">Email</option>
                   </select>
                 </div>
               </div>

@@ -6,9 +6,9 @@ const fadeIn = {
 };
 
 const stats = [
-  { value: "1", label: "Day Event" },
+  { value: "3", label: "Hour Event" },
   { value: "5+", label: "Sessions" },
-  { value: "Live", label: "Auction" },
+  { value: "Live", label: "Sale" },
 ];
 
 export default function AboutEvent() {
@@ -34,7 +34,7 @@ export default function AboutEvent() {
             requests easily.
           </p>
           <p className="font-body text-gray-600 text-base leading-relaxed">
-            Join us for a full day of insights, live demos, keynote addresses,
+            Join us for 3 hours of insights, live demos, keynote addresses,
             and real conversations about how smart ICT can transform the way
             you work — in Lagos, Nigeria.
           </p>

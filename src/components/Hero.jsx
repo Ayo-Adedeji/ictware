@@ -61,6 +61,13 @@ export default function Hero() {
           </span>
         </motion.div>
 
+        {/* Free Entry badge */}
+        <motion.div variants={fadeUp} className="mb-2">
+          <span className="inline-flex items-center gap-2 bg-[#C89B2A] text-white text-xs sm:text-sm font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-lg">
+            🎟️ Free Entry — Register Now
+          </span>
+        </motion.div>
+
         {/* Smart ICT label */}
         <motion.div variants={fadeUp}>
           <p className="text-white/70 text-xs sm:text-sm font-medium tracking-widest uppercase mb-3">

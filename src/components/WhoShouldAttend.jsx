@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 const groups = [
   {
     title: "Businesses",
-    icon: "",
+    icon: "🏢",
     items: ["Offices", "Hotels", "SMEs", "Startups", "Organizations"],
     bg: "from-[#1A4F8A] to-[#1A4F8A]/80",
   },
   {
     title: "Individuals",
-    icon: "",
+    icon: "👤",
     items: ["Professionals", "Entrepreneurs", "Expats", "Remote Workers", "Gadget Users"],
     bg: "from-[#0E8E8E] to-[#0E8E8E]/80",
   },
@@ -72,4 +72,3 @@ export default function WhoShouldAttend() {
     </section>
   );
 }
-
