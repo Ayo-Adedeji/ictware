@@ -49,7 +49,7 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
           <Link
-            to="/Live Sale"
+            to="/live-sales"
             className="text-secondary font-medium hover:text-teal transition-colors text-sm"
           >
             Live Sale
@@ -78,7 +78,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 flex flex-col gap-4">
           <Link
-            to="/Live Sale"
+            to="/live-sales"
             onClick={() => setMenuOpen(false)}
             className="text-secondary font-medium hover:text-teal transition-colors text-sm"
           >
@@ -95,4 +95,5 @@ export default function Navbar() {
     </motion.nav>
   );
 }
+
 
