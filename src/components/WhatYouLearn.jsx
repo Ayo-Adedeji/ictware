@@ -16,7 +16,7 @@ const cards = [
   {
     icon: "👔",
     title: "ICT Concierge Service",
-    desc: "Exclusive tech management for busy executives, experts, and professionals who need it handled.",
+    desc: "Exclusive tech management for busy executives, expats, and professionals who need it handled.",
     accent: "border-[#C89B2A]",
   },
   {

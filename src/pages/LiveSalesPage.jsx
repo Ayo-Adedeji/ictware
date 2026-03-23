@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -11,7 +11,7 @@ import tablet1 from "../assets/tablet1.jpeg";
 const products = [
   {
     id: 1,
-    name: "Dell Latitude 7730",
+    name: "Dell Latitude 7330",
     price: "Contact for Price",
     image: laptop1,
     specs: ["12th Gen Intel Core i7", "16GB RAM", "1TB SSD", "Windows 11 Pro"],
@@ -141,3 +141,4 @@ export default function LiveSalesPage() {
     </div>
   );
 }
+
