@@ -16,7 +16,7 @@ export default function Navbar() {
 
   const scrollToRegister = () => {
     setMenuOpen(false);
-    document.getElementById("register")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("invitation-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (

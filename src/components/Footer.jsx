@@ -64,13 +64,15 @@ export default function Footer() {
             <p className="font-body text-white/30 text-xs uppercase tracking-widest">Follow Us</p>
             <div className="flex items-center gap-4">
               {[
-                { Icon: TwitterIcon, label: "Twitter/X" },
-                { Icon: InstagramIcon, label: "Instagram" },
-                { Icon: LinkedInIcon, label: "LinkedIn" },
-              ].map(({ Icon, label }) => (
+                { Icon: TwitterIcon, label: "Twitter/X", href: "https://x.com/ictweare" },
+                { Icon: InstagramIcon, label: "Instagram", href: "https://instagram.com/ictweare" },
+                { Icon: LinkedInIcon, label: "LinkedIn", href: "https://linkedin.com/company/ictweare" },
+              ].map(({ Icon, label, href }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="text-white/40 hover:text-[#C89B2A] transition-colors duration-200"
                 >

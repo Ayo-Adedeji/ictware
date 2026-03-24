@@ -11,7 +11,7 @@ import tablet1 from "../assets/tablet1.jpeg";
 const products = [
   {
     id: 1,
-    name: "Dell Latitude 7330",
+    name: "Dell Latitude 7730",
     price: "Contact for Price",
     image: laptop1,
     specs: ["12th Gen Intel Core i7", "16GB RAM", "1TB SSD", "Windows 11 Pro"],
@@ -56,7 +56,7 @@ const cardVariants = {
 };
 
 function handleBuyNow(id) {
-  console.log("Buy Now clicked - product ID:", id);
+  console.log("Buy Now clicked — product ID:", id);
 }
 
 function ProductCard({ product, index }) {
@@ -80,9 +80,10 @@ function ProductCard({ product, index }) {
             onError={() => setImgError(true)}
           />
         ) : (
-          <span className="text-5xl"></span>
+          <span className="text-5xl">📦</span>
         )}
       </div>
+
       <div className="p-5 flex flex-col flex-1">
         <h3 className="font-display font-black text-lg text-[#1A4F8A] mb-3">
           {product.name}
@@ -102,7 +103,7 @@ function ProductCard({ product, index }) {
           onClick={() => handleBuyNow(product.id)}
           className="w-full bg-[#1A4F8A] text-white font-bold py-3 rounded-xl hover:bg-[#0E8E8E] transition-colors text-sm tracking-wide"
         >
-          Buy Now
+          Buy Now →
         </button>
       </div>
     </motion.div>
@@ -113,6 +114,7 @@ export default function LiveSalesPage() {
   return (
     <div className="min-h-screen bg-[#F5F7FA]">
       <Navbar />
+
       <section className="pt-28 pb-10 px-4 sm:px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -126,10 +128,11 @@ export default function LiveSalesPage() {
             Live Sales
           </h1>
           <p className="font-body text-gray-500 mt-3 text-sm max-w-lg mx-auto">
-            Available products for the Digital Bridges event - exclusive on-site discounts.
+            Available products for the Digital Bridges event — exclusive on-site discounts.
           </p>
         </motion.div>
       </section>
+
       <section className="px-4 sm:px-6 pb-20 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {products.map((product, i) => (
@@ -137,8 +140,8 @@ export default function LiveSalesPage() {
           ))}
         </div>
       </section>
+
       <Footer />
     </div>
   );
 }
-
