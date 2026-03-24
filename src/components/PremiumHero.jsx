@@ -68,18 +68,12 @@ export default function PremiumHero() {
         <motion.p
           custom={2}
           variants={fadeUp}
-          className="font-body text-white/70 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-4"
+          className="font-body text-white/70 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
         >
           A private executive summit for founders, professionals, and families ready to eliminate digital chaos, reduce risk, and operate with clarity.
         </motion.p>
 
-        <motion.div custom={3} variants={fadeUp} className="mb-10 space-y-1.5">
-          <p className="font-body text-white/35 text-sm italic tracking-wide">You've secured your home.</p>
-          <p className="font-body text-white/35 text-sm italic tracking-wide">You've secured your business.</p>
-          <p className="font-body text-white/60 text-sm italic font-medium tracking-wide">But have you secured your digital life?</p>
-        </motion.div>
-
-        <motion.div custom={4} variants={fadeUp} className="flex flex-col items-center gap-3">
+        <motion.div custom={3} variants={fadeUp} className="flex flex-col items-center gap-3">
           <motion.button
             onClick={scrollToForm}
             whileHover={{ scale: 1.04, boxShadow: "0 0 32px rgba(200,155,42,0.45)" }}
@@ -96,7 +90,7 @@ export default function PremiumHero() {
         </motion.div>
 
         {/* Countdown Timer */}
-        <motion.div custom={5} variants={fadeUp} className="mt-10 flex flex-col items-center gap-3">
+        <motion.div custom={4} variants={fadeUp} className="mt-10 flex flex-col items-center gap-3">
           <p className="text-white/40 text-xs uppercase tracking-[0.25em] font-semibold">Event begins in</p>
           <CountdownTimer />
         </motion.div>

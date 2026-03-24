@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import Navbar from "../components/Navbar";
 import PremiumHero from "../components/PremiumHero";
@@ -41,8 +40,8 @@ export default function LandingPage() {
       <WhoIsThisFor />
       <WhatToExpect />
       <EventDetails />
-      <ProductShowcase />
       <InvitationForm />
+      <ProductShowcase />
       <Footer />
       <FloatingButtons />
     </motion.div>

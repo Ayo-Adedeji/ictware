@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const audience = [
   { icon: "🚀", title: "Founders & Business Owners", desc: "Building and scaling companies" },
   { icon: "💼", title: "Executives & Professionals", desc: "Leading teams and organisations" },
-  { icon: "🏡", title: "Affluent Families", desc: "Managing household digital life" },
+  { icon: "🏡", title: "Families", desc: "Managing household digital life" },
   { icon: "🎯", title: "Decision-Makers", desc: "Those who set the direction" },
 ];
 

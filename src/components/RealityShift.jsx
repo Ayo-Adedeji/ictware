@@ -82,18 +82,6 @@ export default function RealityShift() {
             </div>
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-center bg-[#C89B2A]/10 border border-[#C89B2A]/30 rounded-2xl px-8 py-8"
-        >
-          <p className="font-display font-black text-xl sm:text-2xl text-[#C89B2A] leading-relaxed">
-            "It's not just about locking doors — it's about knowing how many doors exist."
-          </p>
-        </motion.div>
       </div>
     </section>
   );
