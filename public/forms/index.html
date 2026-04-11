@@ -1,0 +1,360 @@
+<!-- ICTWeare IT Health Check | /forms/index.html | Not linked from main site -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ictweare Personal IT Health Check</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Montserrat',sans-serif;background:#0A1F44;color:#fff;min-height:100vh;padding:0}
+.container{max-width:720px;margin:0 auto;padding:32px 16px 64px}
+.header{text-align:center;padding:48px 0 40px;background:#fff;border-radius:16px;margin-bottom:20px}
+.brand{font-size:2rem;font-weight:900;letter-spacing:-0.02em}
+.brand .ict{color:#C9A84C}
+.brand .weare{color:#fff}
+.header-sub{color:rgba(0,0,0,0.4);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.2em;margin-top:6px}
+.header h1{font-size:1.6rem;font-weight:800;margin-top:20px;line-height:1.2;color:#0A1F44}
+.header p{color:rgba(0,0,0,0.5);font-size:0.9rem;margin-top:10px;line-height:1.6}
+.section-card{background:#fff;border-radius:16px;padding:28px 24px;margin-bottom:20px;color:#0A1F44}
+.section-title{font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.2em;color:#007B7F;margin-bottom:4px}
+.section-heading{font-size:1.1rem;font-weight:800;color:#0A1F44;margin-bottom:20px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#555;margin-bottom:6px}
+.field input[type=text],.field input[type=email],.field input[type=tel]{width:100%;border:1.5px solid #ddd;border-radius:10px;padding:12px 14px;font-family:'Montserrat',sans-serif;font-size:0.9rem;color:#0A1F44;outline:none;transition:border-color 0.2s}
+.field input:focus{border-color:#007B7F;box-shadow:0 0 0 3px rgba(0,123,127,0.12)}
+.field.error input{border-color:#e53e3e!important}
+.error-msg{color:#e53e3e;font-size:0.72rem;margin-top:4px;display:none}
+.field.error .error-msg{display:block}
+.radio-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.radio-group label{display:flex;align-items:center;gap:6px;background:#F5F7FA;border:1.5px solid #ddd;border-radius:8px;padding:8px 14px;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.15s;color:#0A1F44}
+.radio-group input{accent-color:#007B7F}
+.radio-group label:has(input:checked){background:#007B7F;border-color:#007B7F;color:#fff}
+.question-row{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #f0f0f0}
+.question-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.question-text{font-size:0.88rem;font-weight:600;color:#0A1F44;margin-bottom:10px;line-height:1.4}
+.toggle-row{display:flex;gap:10px}
+.toggle-btn{flex:1;padding:11px 0;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all 0.15s;text-align:center}
+.toggle-yes{background:#e6f4f4;color:#007B7F;border-color:#007B7F}
+.toggle-yes.active{background:#007B7F;color:#fff}
+.toggle-no{background:#f5f5f5;color:#888;border-color:#ddd}
+.toggle-no.active{background:#0A1F44;color:#fff;border-color:#0A1F44}
+.submit-btn{width:100%;background:#C9A84C;color:#0A1F44;font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;padding:16px;border:none;border-radius:12px;cursor:pointer;letter-spacing:0.05em;transition:background 0.2s;margin-top:8px}
+.submit-btn:hover{background:#b8943e}
+.submit-btn:disabled{opacity:0.6;cursor:not-allowed}
+#results{display:none;text-align:center;padding:48px 0}
+.results-name{font-size:1.4rem;font-weight:800;color:#C9A84C;margin-bottom:8px}
+.score-circle{width:160px;height:160px;border-radius:50%;border:6px solid #C9A84C;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:24px auto}
+.score-number{font-size:3rem;font-weight:900;color:#C9A84C;line-height:1}
+.score-label{font-size:0.7rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.15em;margin-top:4px}
+.score-message{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:20px 24px;margin:24px 0;font-size:0.95rem;line-height:1.6;color:rgba(255,255,255,0.85)}
+.results-note{color:rgba(255,255,255,0.45);font-size:0.78rem;margin-bottom:28px}
+.dl-btn{background:#C9A84C;color:#0A1F44;font-family:'Montserrat',sans-serif;font-size:0.9rem;font-weight:800;padding:14px 32px;border:none;border-radius:10px;cursor:pointer;letter-spacing:0.05em}
+.dl-btn:hover{background:#b8943e}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand"><span class="ict">ict</span><span class="weare">weare</span></div>
+    <div class="header-sub">Personal IT Health Check</div>
+    <h1>How Optimised Is Your Digital Life?</h1>
+    <p>Answer 28 quick questions and get your personal IT health score instantly.</p>
+  </div>
+
+  <form id="healthForm" novalidate>
+    <input type="hidden" name="_subject" value="ictweare IT Health Check Submission" />
+    <input type="hidden" name="_cc" value="ictweare.support@ictweare.com" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_next" value="false" />
+    <input type="hidden" name="Score" id="h_score" />
+    <input type="hidden" name="Score Message" id="h_message" />
+    <input type="hidden" name="Answers Summary" id="h_answers" />
+
+    <div class="section-card">
+      <div class="section-title">Section 1</div>
+      <div class="section-heading">About You</div>
+      <div class="field" id="f_name">
+        <label>Full Name *</label>
+        <input type="text" name="Full Name" id="fullName" placeholder="Your full name" />
+        <div class="error-msg">Please enter your full name.</div>
+      </div>
+      <div class="field" id="f_phone">
+        <label>Phone Number *</label>
+        <input type="tel" name="Phone Number" id="phone" placeholder="+234 800 000 0000" />
+        <div class="error-msg">Please enter your phone number.</div>
+      </div>
+      <div class="field" id="f_email">
+        <label>Email Address *</label>
+        <input type="email" name="Email Address" id="emailAddr" placeholder="you@example.com" />
+        <div class="error-msg">Please enter a valid email address.</div>
+      </div>
+      <div class="field" id="f_category">
+        <label>Category * (select all that apply)</label>
+        <div class="radio-group">
+          <label><input type="checkbox" name="Category" value="Individual" /> Individual</label>
+          <label><input type="checkbox" name="Category" value="Business Owner" /> Business Owner</label>
+          <label><input type="checkbox" name="Category" value="Corporate Professional" /> Corporate Professional</label>
+          <label><input type="checkbox" name="Category" value="Family &amp; Household" /> Family &amp; Household</label>
+        </div>
+        <div class="error-msg">Please select at least one category.</div>
+      </div>
+    </div>
+
+    <div id="scored-sections"></div>
+
+    <div class="section-card" style="text-align:center;background:#0A1F44;border:1px solid rgba(201,168,76,0.3)">
+      <button type="submit" class="submit-btn" id="submitBtn">Submit &amp; Get My Score</button>
+    </div>
+  </form>
+
+  <div id="results">
+    <div class="results-name" id="resultsName"></div>
+    <p style="color:rgba(255,255,255,0.5);font-size:0.85rem">Your ictweare IT Health Score</p>
+    <div class="score-circle">
+      <div class="score-number" id="scoreDisplay">0</div>
+      <div class="score-label">out of 100</div>
+    </div>
+    <div class="score-message" id="scoreMessage"></div>
+    <p class="results-note">A detailed report has been sent to your email.</p>
+    <button class="dl-btn" id="dlBtn">Download My Report (PDF)</button>
+  </div>
+</div>
+
+<script>
+var SECTIONS = [
+  { title: "Device Ecosystem", questions: ["I have a clear record of all my devices","My devices perform efficiently","I have a clear upgrade plan","I know the value of unused devices"] },
+  { title: "Subscriptions", questions: ["I know all my subscriptions","I review them regularly","I don't pay for unused services","My tools match my needs"] },
+  { title: "Security", questions: ["I reuse passwords","I use 2FA","My important data are backed up","I use a password manager"] },
+  { title: "Productivity", questions: ["My devices don't slow me down","My files/apps are organised","I use productivity tools","I rarely feel tech frustration"] },
+  { title: "Automation", questions: ["I use quality accessories","I automate tasks","My space is tech-enabled","I leverage convenience tech"] },
+  { title: "Support", questions: ["I address IT issues before they escalate","I know a quality IT support team","I plan upgrades","I maintain a device routine"] },
+  { title: "Value Recovery", questions: ["I have unused devices","I know their value","I've sold/swapped before","I'm open to monetising"] }
+];
+
+var answers = {};
+
+var container = document.getElementById("scored-sections");
+SECTIONS.forEach(function(sec, si) {
+  var card = document.createElement("div");
+  card.className = "section-card";
+  card.innerHTML = '<div class="section-title">Section ' + (si + 2) + '</div><div class="section-heading">' + sec.title + '</div>';
+  sec.questions.forEach(function(q, qi) {
+    var key = "s" + si + "_q" + qi;
+    var row = document.createElement("div");
+    row.className = "question-row";
+    row.id = "row_" + key;
+    row.innerHTML =
+      '<div class="question-text">' + q + '</div>' +
+      '<div class="toggle-row">' +
+        '<button type="button" class="toggle-btn toggle-yes" data-key="' + key + '" data-val="YES">YES</button>' +
+        '<button type="button" class="toggle-btn toggle-no" data-key="' + key + '" data-val="NO">NO</button>' +
+      '</div>' +
+      '<div class="error-msg" id="err_' + key + '" style="display:none;color:#e53e3e;font-size:0.72rem;margin-top:4px">Please answer this question.</div>';
+    card.appendChild(row);
+  });
+  container.appendChild(card);
+});
+
+document.addEventListener("click", function(e) {
+  var btn = e.target.closest(".toggle-btn");
+  if (!btn) return;
+  var key = btn.dataset.key;
+  var val = btn.dataset.val;
+  answers[key] = val;
+  var row = document.getElementById("row_" + key);
+  row.querySelectorAll(".toggle-btn").forEach(function(b) { b.classList.remove("active"); });
+  btn.classList.add("active");
+  document.getElementById("err_" + key).style.display = "none";
+});
+
+function getScoreMessage(score) {
+  if (score <= 40) return "Your digital life needs serious attention. ictweare can help you build a solid foundation.";
+  if (score <= 60) return "You have a base to work with, but there are significant gaps. Let's close them together.";
+  if (score <= 80) return "You're on the right track! A few optimisations and you'll be running at full capacity.";
+  return "You're highly optimised! You're ahead of most - ictweare can help you stay there.";
+}
+
+function animateCount(el, target, duration) {
+  var start = 0;
+  var step = Math.ceil(target / (duration / 16));
+  var timer = setInterval(function() {
+    start = Math.min(start + step, target);
+    el.textContent = start;
+    if (start >= target) clearInterval(timer);
+  }, 16);
+}
+
+function buildAnswersSummary() {
+  return SECTIONS.map(function(sec, si) {
+    return sec.title + ": " + sec.questions.map(function(q, qi) {
+      return q + " -> " + (answers["s" + si + "_q" + qi] || "N/A");
+    }).join(" | ");
+  }).join("\n");
+}
+
+function generatePDF(name, email, phone, category, score, message) {
+  var jsPDF = window.jspdf.jsPDF;
+  var doc = new jsPDF({ unit: "mm", format: "a4" });
+  var W = doc.internal.pageSize.getWidth();
+  var y = 20;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(20);
+  doc.setTextColor(201, 168, 76);
+  doc.text("ict", 20, y);
+  var ictW = doc.getTextWidth("ict");
+  doc.setTextColor(10, 31, 68);
+  doc.text("weare", 20 + ictW, y);
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(80, 80, 80);
+  doc.text("Personal IT Health Check Report", 20, y + 7);
+  doc.setDrawColor(201, 168, 76);
+  doc.setLineWidth(0.5);
+  doc.line(20, y + 11, W - 20, y + 11);
+  y += 20;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9);
+  doc.setTextColor(0, 123, 127);
+  doc.text("RESPONDENT DETAILS", 20, y); y += 6;
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(30, 30, 30);
+  [["Name", name], ["Email", email], ["Phone", phone], ["Category", category]].forEach(function(row) {
+    doc.setFont("helvetica", "bold"); doc.text(row[0] + ":", 20, y);
+    doc.setFont("helvetica", "normal"); doc.text(row[1] || "", 55, y);
+    y += 6;
+  });
+  y += 4;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9);
+  doc.setTextColor(0, 123, 127);
+  doc.text("YOUR SCORE", 20, y); y += 6;
+  doc.setFontSize(28);
+  doc.setTextColor(201, 168, 76);
+  doc.text(score + " / 100", 20, y); y += 12;
+  doc.setFontSize(9);
+  doc.setTextColor(30, 30, 30);
+  doc.setFont("helvetica", "normal");
+  var msgLines = doc.splitTextToSize(message, W - 40);
+  doc.text(msgLines, 20, y); y += msgLines.length * 5 + 6;
+
+  SECTIONS.forEach(function(sec, si) {
+    if (y > 260) { doc.addPage(); y = 20; }
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9);
+    doc.setTextColor(0, 123, 127);
+    doc.text(("Section " + (si + 2) + " - " + sec.title).toUpperCase(), 20, y); y += 6;
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(30, 30, 30);
+    sec.questions.forEach(function(q, qi) {
+      if (y > 270) { doc.addPage(); y = 20; }
+      var ans = answers["s" + si + "_q" + qi] || "N/A";
+      var line = doc.splitTextToSize("- " + q + "  ->  " + ans, W - 40);
+      doc.text(line, 20, y); y += line.length * 5;
+    });
+    y += 4;
+  });
+
+  if (y > 270) { doc.addPage(); y = 20; }
+  doc.setDrawColor(201, 168, 76);
+  doc.line(20, y, W - 20, y); y += 6;
+  doc.setFontSize(8);
+  doc.setTextColor(120, 120, 120);
+  doc.text("Generated by ictweare  |  ictweare.com", 20, y);
+
+  doc.save("ictweare-IT-Health-Check-" + name.replace(/\s+/g, "-") + ".pdf");
+}
+
+document.getElementById("healthForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  var valid = true;
+
+  var nameEl = document.getElementById("fullName");
+  var phoneEl = document.getElementById("phone");
+  var emailEl = document.getElementById("emailAddr");
+
+  [["f_name", nameEl, function(v) { return v.trim().length > 0; }],
+   ["f_phone", phoneEl, function(v) { return v.trim().length > 0; }],
+   ["f_email", emailEl, function(v) { return /\S+@\S+\.\S+/.test(v); }]
+  ].forEach(function(item) {
+    var field = document.getElementById(item[0]);
+    if (!item[2](item[1].value)) { field.classList.add("error"); valid = false; }
+    else field.classList.remove("error");
+  });
+
+  var catChecked = document.querySelectorAll('input[name="Category"]:checked');
+  var catField = document.getElementById("f_category");
+  if (catChecked.length === 0) { catField.classList.add("error"); valid = false; }
+  else catField.classList.remove("error");
+
+  SECTIONS.forEach(function(sec, si) {
+    sec.questions.forEach(function(_, qi) {
+      var key = "s" + si + "_q" + qi;
+      if (!answers[key]) {
+        document.getElementById("err_" + key).style.display = "block";
+        valid = false;
+      }
+    });
+  });
+
+  if (!valid) {
+    var firstErr = document.querySelector(".field.error");
+    if (!firstErr) {
+      var errMsg = document.querySelector('.error-msg[style*="block"]');
+      if (errMsg) firstErr = errMsg.closest(".question-row");
+    }
+    if (firstErr) firstErr.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+
+  var totalYes = 0;
+  SECTIONS.forEach(function(sec, si) {
+    sec.questions.forEach(function(_, qi) {
+      if (answers["s" + si + "_q" + qi] === "YES") totalYes++;
+    });
+  });
+  var score = Math.round((totalYes / 28) * 100);
+  var message = getScoreMessage(score);
+  var name = nameEl.value.trim();
+  var firstName = name.split(" ")[0];
+  var email = emailEl.value.trim();
+  var phone = phoneEl.value.trim();
+  var catVals = Array.from(document.querySelectorAll('input[name="Category"]:checked')).map(function(el) { return el.value; });
+  var category = catVals.join(", ");
+
+  document.getElementById("h_score").value = score + " / 100";
+  document.getElementById("h_message").value = message;
+  document.getElementById("h_answers").value = buildAnswersSummary();
+
+  var btn = document.getElementById("submitBtn");
+  btn.disabled = true; btn.textContent = "Submitting...";
+  try {
+    var fd = new FormData(e.target);
+    await fetch("https://formsubmit.co/ajax/" + email, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: fd
+    });
+  } catch(_) {}
+
+  document.getElementById("healthForm").style.display = "none";
+  var resultsEl = document.getElementById("results");
+  resultsEl.style.display = "block";
+  document.getElementById("resultsName").textContent = "Great job, " + firstName + "!";
+  document.getElementById("scoreMessage").textContent = message;
+  animateCount(document.getElementById("scoreDisplay"), score, 1200);
+  resultsEl.scrollIntoView({ behavior: "smooth" });
+
+  document.getElementById("dlBtn").onclick = function() {
+    generatePDF(name, email, phone, category, score, message);
+  };
+});
+</script>
+</body>
+</html>

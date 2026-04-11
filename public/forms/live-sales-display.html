@@ -1,0 +1,89 @@
+﻿<!-- ICTWeare Live Sales | QR Display Screen | Landscape 16:9 for LED screen -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ICTWeare Live Sales</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;font-family:"Montserrat",sans-serif;background:#0A1F44;color:#fff;overflow:hidden}
+.screen{width:100vw;height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative}
+.screen::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:linear-gradient(to bottom,transparent,rgba(201,168,76,0.25),transparent)}
+.left{display:flex;flex-direction:column;justify-content:center;padding:6vh 6vw 6vh 7vw}
+.logos-row{display:flex;align-items:center;gap:16px;margin-bottom:clamp(16px,3vh,28px)}
+.disp-logo{height:clamp(28px,3vh,42px);width:auto;object-fit:contain}
+.logo-sep{color:rgba(255,255,255,0.2);font-size:0.8rem;font-weight:300}
+.event-tag{font-size:clamp(0.6rem,1vw,0.75rem);text-transform:uppercase;letter-spacing:0.25em;color:rgba(255,255,255,0.35);margin-bottom:clamp(20px,3.5vh,40px)}
+.headline{font-size:clamp(1.8rem,3.8vw,3.4rem);font-weight:900;line-height:1.1;letter-spacing:-0.02em;margin-bottom:clamp(12px,2vh,20px)}
+.headline .gold{color:#C9A84C}
+.sub{font-size:clamp(0.8rem,1.4vw,1rem);color:rgba(255,255,255,0.5);line-height:1.7;max-width:480px;margin-bottom:clamp(24px,4vh,48px)}
+.products-hint{display:flex;flex-direction:column;gap:10px}
+.product-tag{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:8px 16px;font-size:clamp(0.7rem,1.1vw,0.85rem);font-weight:600;color:rgba(255,255,255,0.7);width:fit-content}
+.product-tag .dot{width:6px;height:6px;border-radius:50%;background:#C9A84C;flex-shrink:0}
+.right{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6vh 7vw 6vh 6vw;gap:clamp(16px,2.5vh,28px)}
+.scan-label{font-size:clamp(0.65rem,1vw,0.78rem);text-transform:uppercase;letter-spacing:0.25em;color:rgba(255,255,255,0.35)}
+.qr-wrapper{background:#fff;border-radius:clamp(12px,1.5vw,20px);padding:clamp(14px,1.5vw,20px);box-shadow:0 0 80px rgba(201,168,76,0.2),0 0 0 1px rgba(201,168,76,0.15)}
+#qrcode canvas,#qrcode img{display:block}
+.url-pill{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.3);border-radius:100px;padding:clamp(7px,1vh,11px) clamp(18px,2vw,28px);font-size:clamp(0.75rem,1.2vw,0.95rem);font-weight:700;color:#C9A84C;letter-spacing:0.05em}
+.footer-bar{position:absolute;bottom:0;left:0;right:0;padding:clamp(8px,1.2vh,14px) 7vw;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06)}
+.footer-bar span{font-size:clamp(0.55rem,0.8vw,0.68rem);color:rgba(255,255,255,0.18);text-transform:uppercase;letter-spacing:0.15em}
+.dl-btn{background:transparent;border:1px solid rgba(201,168,76,0.2);color:rgba(201,168,76,0.4);font-family:"Montserrat",sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:6px 16px;border-radius:100px;cursor:pointer;transition:all 0.2s}
+.dl-btn:hover{border-color:#C9A84C;color:#C9A84C}
+</style>
+</head>
+<body>
+<div class="screen" id="screenEl">
+  <div class="left">
+    <div class="logos-row">
+      <img src="ictweare-logo.png" alt="ictweare" class="disp-logo" />
+      <span class="logo-sep">x</span>
+      <img src="serviceis-logo.png" alt="ServiceIS" class="disp-logo" />
+    </div>
+    <div class="event-tag">Digital Bridges Summit 2026 &nbsp;·&nbsp; Lagos</div>
+    <h1 class="headline">Exclusive Devices.<br /><span class="gold">Live Sales.</span></h1>
+    <p class="sub">Scan to browse and purchase premium devices available exclusively at today's event.</p>
+    <div class="products-hint">
+      <div class="product-tag"><span class="dot"></span>Dell Latitude 7330 &amp; 7320</div>
+      <div class="product-tag"><span class="dot"></span>Microsoft Desktop Tablet</div>
+      <div class="product-tag"><span class="dot"></span>iPhone 8 Plus &amp; iPhone 14</div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="scan-label">Scan to shop now</div>
+    <div class="qr-wrapper"><div id="qrcode"></div></div>
+    <div class="url-pill">ictware.com/live-sales</div>
+  </div>
+  <div class="footer-bar">
+    <span>ictweare.com &nbsp;·&nbsp; Digital IT Services</span>
+    <button class="dl-btn" id="dlBtn">Download as Image</button>
+  </div>
+</div>
+<script>
+  var qrSize = Math.min(Math.round(window.innerHeight * 0.42), 300);
+  new QRCode(document.getElementById("qrcode"), {
+    text: "https://ictware.com/live-sales",
+    width: qrSize, height: qrSize,
+    colorDark: "#0A1F44", colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  document.getElementById("dlBtn").addEventListener("click", async function() {
+    var btn = this;
+    btn.style.visibility = "hidden";
+    try {
+      var canvas = await html2canvas(document.getElementById("screenEl"), {
+        backgroundColor: "#0A1F44", scale: 2, useCORS: true, logging: false,
+        width: window.innerWidth, height: window.innerHeight
+      });
+      var link = document.createElement("a");
+      link.download = "ictweare-live-sales-display.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    } finally { btn.style.visibility = "visible"; }
+  });
+</script>
+</body>
+</html>
