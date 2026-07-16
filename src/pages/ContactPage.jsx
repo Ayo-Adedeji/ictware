@@ -32,19 +32,11 @@ export default function ContactPage() {
     inquiryType: type ? type.charAt(0).toUpperCase() + type.slice(1) : "",
     serviceCategory: category || "",
   }));
-  const [submitted, setSubmitted] = useState(false);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Front-end only: no backend wired yet. Extend here for the request flow.
-    setSubmitted(true);
-  };
 
   return (
     <motion.div
@@ -74,22 +66,15 @@ export default function ContactPage() {
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.4fr_1fr] gap-10">
           {/* Form */}
           <Reveal className="bg-white border border-slate-400/20 rounded-3xl p-7 sm:p-10">
-            {submitted ? (
-              <div className="text-center py-10">
-                <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-amber-500 text-navy-950 text-2xl mb-4">
-                  ✓
-                </span>
-                <h2 className="font-heading font-semibold text-2xl text-navy-950 mb-2">Request received</h2>
-                <p className="text-slate-400 font-sans text-sm mb-6">
-                  Thanks, {form.name || "there"}. We'll respond within business hours.
-                </p>
-                <Button onClick={() => { setForm(EMPTY); setSubmitted(false); }} variant="primary" tone="light">
-                  Send another
-                </Button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid sm:grid-cols-2 gap-5">
+            <form
+              action="https://formsubmit.co/info@ictweare.com"
+              method="POST"
+              className="space-y-5"
+            >
+              <input type="hidden" name="_subject" value="New ICT request via Ictware" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_next" value="https://ictweare.com/contact" />
+              <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="name" className="block font-sans text-sm font-medium text-navy-950 mb-1.5">
                       Name
@@ -194,19 +179,12 @@ export default function ContactPage() {
                   Send Request
                 </Button>
               </form>
-            )}
           </Reveal>
 
           {/* Direct contact */}
           <Reveal index={1} className="bg-navy-950 rounded-3xl p-7 sm:p-10 h-fit">
             <h2 className="font-heading font-semibold text-xl text-bone-50 mb-6">Direct contact</h2>
             <div className="space-y-5">
-              <div>
-                <p className="text-xs uppercase tracking-widest text-slate-400 mb-1">Phone (Nigeria)</p>
-                <a href={`tel:${CONTACT.phoneNigeria}`} className="text-bone-50/85 font-sans text-sm hover:text-amber-500 transition-colors">
-                  {CONTACT.phoneNigeriaDisplay}
-                </a>
-              </div>
               <div>
                 <p className="text-xs uppercase tracking-widest text-slate-400 mb-1">Phone (UK)</p>
                 <a href={`tel:${CONTACT.phoneUK.replace(/[^+\d]/g, "")}`} className="text-bone-50/85 font-sans text-sm hover:text-amber-500 transition-colors">

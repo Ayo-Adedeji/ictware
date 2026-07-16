@@ -45,6 +45,23 @@ const paths = {
       <path d="M9.5 17.5 12 21l2.5-3.5" />
     </>
   ),
+  iot: (
+    <>
+      <circle cx="12" cy="12" r="2.4" />
+      <path d="M12 9.6V5M12 14.4V19M9.6 12H5M14.4 12H19" />
+      <circle cx="12" cy="5" r="1.6" />
+      <circle cx="12" cy="19" r="1.6" />
+      <circle cx="5" cy="12" r="1.6" />
+      <circle cx="19" cy="12" r="1.6" />
+    </>
+  ),
+  consultancy: (
+    <>
+      <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H11v16H5.5A2.5 2.5 0 0 1 3 17.5V6.5Z" />
+      <path d="M21 6.5A2.5 2.5 0 0 0 18.5 4H13v16h5.5A2.5 2.5 0 0 0 21 17.5V6.5Z" />
+      <path d="M7 8.5h2M7 12h2M7 15.5h2" />
+    </>
+  ),
 };
 
 export default function ServiceIcon({ glyph, className = "w-7 h-7", strokeWidth = 1.6 }) {

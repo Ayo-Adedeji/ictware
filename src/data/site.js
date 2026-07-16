@@ -55,6 +55,24 @@ export const SERVICE_CATEGORIES = [
     includes: ["custom applications", "systems integration", "ongoing support & upgrades"],
     glyph: "software",
   },
+  {
+    id: "iot",
+    title: "IoT, Smart Home & Automation",
+    short: "Connected devices and automation that make homes and workplaces run themselves.",
+    description:
+      "Smart home and workplace automation, from connected devices and sensors to control systems that tie your environment together.",
+    includes: ["smart devices", "sensors & controllers", "automation setup", "integration & support"],
+    glyph: "iot",
+  },
+  {
+    id: "consultancy",
+    title: "Consultancy & Training",
+    short: "Expert advice and hands-on training so your team can do more with ICT.",
+    description:
+      "ICT consultancy and training, giving you clear guidance and a team that knows how to get the most from your technology.",
+    includes: ["ICT strategy", "technology audits", "staff training", "ongoing advisory"],
+    glyph: "consultancy",
+  },
 ];
 
 export const BRANDS = ["Cisco", "TP-Link", "Samsung", "Palo Alto Networks", "Apple", "Grandstream"];
@@ -96,10 +114,8 @@ export const TESTIMONIALS = [
 ];
 
 export const CONTACT = {
-  phoneNigeria: "+234 913 370 6582",
-  phoneNigeriaDisplay: "+234 913 370 6582",
-  phoneUK: "+44 (0) ___ ___ ____",
-  email: "hello@ictware.com",
+  phoneUK: "+44 7745 320304",
+  email: "info@ictweare.com",
   hours: "Mon–Fri 9:00–17:00, Sat 10:00–14:00, Sun closed (emergency by arrangement)",
 };
 

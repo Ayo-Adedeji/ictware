@@ -8,9 +8,9 @@ export default function Footer() {
   return (
     <footer className="bg-navy-950 text-bone-50 py-14 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-10 mb-10">
+        <div className="grid md:grid-cols-3 gap-10 mb-10 text-center md:text-left">
           {/* Logo + mission */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col items-center md:items-start gap-4">
             <Logo withText />
             <p className="text-slate-400 text-sm max-w-xs leading-relaxed">
               One accountable ICT partner for individuals and businesses — from procurement and
@@ -19,7 +19,7 @@ export default function Footer() {
           </div>
 
           {/* Quick links */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col items-center md:items-start gap-3">
             <p className="text-xs uppercase tracking-widest text-slate-400 mb-1">Quick Links</p>
             {[
               { to: "/", label: "Home" },
@@ -38,14 +38,14 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col items-center md:items-start gap-3">
             <p className="text-xs uppercase tracking-widest text-slate-400 mb-1">Contact</p>
-            <a
+            {/* <a
               href={`tel:${CONTACT.phoneNigeria}`}
               className="text-bone-50/80 hover:text-amber-500 transition-colors w-fit font-sans text-sm"
             >
               Nigeria: {CONTACT.phoneNigeriaDisplay}
-            </a>
+            </a> */}
             <a
               href={`tel:${CONTACT.phoneUK.replace(/[^+\d]/g, "")}`}
               className="text-bone-50/80 hover:text-amber-500 transition-colors w-fit font-sans text-sm"
@@ -67,7 +67,7 @@ export default function Footer() {
           <p className="text-slate-400 font-sans text-xs text-center sm:text-left">
             © {year} Ictware. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center justify-center gap-6">
             {SOCIALS.map((s) => (
               <a
                 key={s.label}
