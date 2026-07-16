@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,12 +7,15 @@
 
 @layer base {
   body {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #F7F3EC;
+    color: #16233D;
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Fraunces", serif;
     letter-spacing: -0.02em;
     line-height: 1.1;
   }
@@ -19,9 +23,61 @@
   p {
     line-height: 1.75;
   }
+
+  a, button, [role="button"], .cursor-interactive, input, select, textarea, label {
+    cursor: pointer;
+  }
 }
 
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar { display: none; }
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Scroll reveal: hidden until .is-visible is applied */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hero assemble animation base */
+  @keyframes assemble-in {
+    0% {
+      opacity: 0;
+      transform: translate(var(--tx, 0), var(--ty, 0)) scale(var(--ts, 1)) rotate(var(--tr, 0));
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0) scale(1) rotate(0);
+    }
+  }
+
+  .assemble {
+    opacity: 0;
+    animation: assemble-in var(--td, 500ms) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--ad, 0ms);
+  }
+}
+
+/* Respect reduced-motion: disable reveal/assemble animations and show content */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .assemble {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

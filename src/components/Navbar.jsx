@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import logo from "../assets/ICT-WEARE--V2-TRT-b.png";
+import Logo from "./ui/Logo";
+import Button from "./ui/Button";
+
+const links = [
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About" },
+  { to: "/services", label: "Services" },
+  { to: "/contact", label: "Contact" },
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -14,86 +22,85 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToRegister = () => {
-    setMenuOpen(false);
-    document.getElementById("invitation-form")?.scrollIntoView({ behavior: "smooth" });
-  };
+  // Lock body scroll while the mobile takeover panel is open.
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  const navLinkClass = ({ isActive }) =>
+    `font-sans font-medium text-sm transition-colors cursor-pointer ${
+      isActive ? "text-amber-500" : "text-bone-50/80 hover:text-amber-500"
+    }`;
 
   return (
     <motion.nav
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 transition-shadow duration-300 ${
-        scrolled ? "shadow-md" : ""
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-navy-950/95 backdrop-blur shadow-lg shadow-black/20" : "bg-navy-950/70"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="flex items-center">
-          {!logoError ? (
-            <img
-              src={logo}
-              alt="Digital Bridges Summit"
-              className="h-10 w-auto"
-              style={{ maxWidth: "220px", display: "block" }}
-              onError={() => setLogoError(true)}
-            />
-          ) : (
-            <span className="font-display font-bold text-xl text-primary">
-              Digital Bridges Summit
-            </span>
-          )}
-        </Link>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        {/* Logo (left) */}
+        <Logo />
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6">
-          <Link
-            to="/live-sales"
-            className="text-secondary font-medium hover:text-teal transition-colors text-sm"
-          >
-            Live Sale
-          </Link>
-          <button
-            onClick={scrollToRegister}
-            className="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-teal transition-colors text-sm"
-          >
-            Register Now
-          </button>
+        {/* Desktop nav (right) */}
+        <div className="hidden md:flex items-center gap-8">
+          {links.map((l) => (
+            <NavLink key={l.to} to={l.to} end={l.to === "/"} className={navLinkClass}>
+              {l.label}
+            </NavLink>
+          ))}
+          <Button to="/contact" variant="primary" tone="navy" className="!px-5 !py-2.5 !text-sm">
+            Request a Service
+          </Button>
         </div>
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex flex-col gap-1.5 p-2 cursor-pointer"
           onClick={() => setMenuOpen((v) => !v)}
           aria-label="Toggle menu"
         >
-          <span className={`block w-6 h-0.5 bg-secondary transition-transform duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`block w-6 h-0.5 bg-secondary transition-opacity duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-6 h-0.5 bg-secondary transition-transform duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          <span className={`block w-6 h-0.5 bg-bone-50 transition-transform duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+          <span className={`block w-6 h-0.5 bg-bone-50 transition-opacity duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+          <span className={`block w-6 h-0.5 bg-bone-50 transition-transform duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
         </button>
       </div>
 
-      {/* Mobile dropdown */}
-      {menuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 flex flex-col gap-4">
-          <Link
-            to="/live-sales"
+      {/* Mobile takeover panel (80vh) */}
+      <div
+        className={`md:hidden fixed inset-x-0 top-16 z-40 bg-navy-950 border-t border-white/10 flex flex-col transition-all duration-300 ${
+          menuOpen ? "h-[80vh] opacity-100 pointer-events-auto" : "h-0 opacity-0 pointer-events-none overflow-hidden"
+        }`}
+      >
+        <div className="h-full flex flex-col items-center justify-center gap-8 text-center px-6">
+          {links.map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.to === "/"}
+              onClick={() => setMenuOpen(false)}
+              className={`font-heading text-2xl ${navLinkClass}`}
+            >
+              {l.label}
+            </NavLink>
+          ))}
+          <Button
+            to="/contact"
+            variant="primary"
+            tone="navy"
+            className="mt-2"
             onClick={() => setMenuOpen(false)}
-            className="text-secondary font-medium hover:text-teal transition-colors text-sm"
           >
-            Live Sale
-          </Link>
-          <button
-            onClick={scrollToRegister}
-            className="bg-primary text-white px-5 py-2 rounded-full font-semibold hover:bg-teal transition-colors w-full text-sm"
-          >
-            Register Now
-          </button>
+            Request a Service
+          </Button>
         </div>
-      )}
+      </div>
     </motion.nav>
   );
 }
-
-

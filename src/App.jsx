@@ -1,19 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
-import AuctionPage from "./pages/AuctionPage";
-import LiveSalesPage from "./pages/LiveSalesPage";
-import ProductPage from "./pages/ProductPage";
-import PaymentSuccessPage from "./pages/PaymentSuccessPage";
+import HomePage from "./pages/HomePage";
+import ServicesPage from "./pages/ServicesPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/auction" element={<AuctionPage />} />
-        <Route path="/live-sales" element={<LiveSalesPage />} />
-        <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/payment-success" element={<PaymentSuccessPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </BrowserRouter>
   );
